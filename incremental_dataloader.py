@@ -93,7 +93,7 @@ class IncrementalDataset:
                 label_targets.append(target[i])
         for_memory = (label_indices.copy(),label_targets.copy())
         
-        if(self.args.overflow and not(mode=="test")):
+        if('overflow' in dir(self.args) and self.args.overflow and not(mode=="test")):
             memory_indices, memory_targets = memory
             return memory_indices, memory
             
@@ -137,7 +137,7 @@ class IncrementalDataset:
         print(self.increments)
         min_class = sum(self.increments[:self._current_task])
         max_class = sum(self.increments[:self._current_task + 1])
-        if(self.args.overflow):
+        if('overflow' in dir(self.args) and self.args.overflow):
             min_class = 0
             max_class = sum(self.increments)
         
